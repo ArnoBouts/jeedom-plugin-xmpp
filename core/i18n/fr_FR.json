@@ -1,0 +1,30 @@
+{
+    "plugins\/mail\/desktop\/php\/mail.php": {
+        "Ajouter XMPP": "Ajouter XMPP",
+        "Rechercher": "Rechercher",
+        "Mes JIDs": "Mes JIDs",
+        "Général": "Général",
+        "Nom de l'équipement xmpp": "Nom de l'équipement xmpp",
+        "Objet parent": "Objet parent",
+        "Aucun": "Aucun",
+        "Activer": "Activer",
+        "Visible": "Visible",
+        "Serveur XMPP": "Serveur XMPP",
+        "Port XMPP": "Port XMPP",
+        "Aucune": "Aucune",
+        "JID XMPP": "JID XMPP",
+        "Mot de passe XMPP": "Mot de passe XMPP",
+        "JID": "JID",
+        "Ajouter une commande xmpp": "Ajouter une commande xmpp",
+        "Nom": "Nom",
+        "Supprimer": "Supprimer",
+        "Sauvegarder": "Sauvegarder"
+    },
+    "plugins\/xmpp\/desktop\/js\/xmpp.js": {
+        "Tester": "Tester"
+    },
+    "plugins\/xmpp\/plugin_info\/info.xml": {
+        "Plugin pour envoyer des messages va xmpp": "Plugin pour envoyer des messages va xmpp",
+        "Aucune": "Aucune"
+    }
+}

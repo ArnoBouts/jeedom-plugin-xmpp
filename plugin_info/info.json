@@ -1,0 +1,11 @@
+{
+	"id" : "xmpp",
+	"name" : "Xmpp",
+	"description" : "Plugin pour envoyer des messages va xmpp",
+	"licence" : "AGPL",
+	"author" : "Stoub",
+	"require" : "2.4",
+	"category" : "communication",
+	"changelog" : "https://jeedom.github.io/plugin-mail/#language#/changelog",
+	"documentation" : "https://jeedom.github.io/plugin-mail/#language#/"
+}
