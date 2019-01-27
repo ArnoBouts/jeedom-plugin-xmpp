@@ -62,7 +62,7 @@ class xmppCmd extends cmd {
 			$_options['title'] = __('[Jeedom] - Notification', __FILE__);
 		}
 
-		$XMPP = new BirknerAlex\XMPPHP\XMPP($eqLogic->getConfiguration('xmpp::server'), $eqLogic->getConfiguration('xmpp::port'), $eqLogic->getConfiguration('xmpp::fromjid'), $eqLogic->getConfiguration('xmpp::password'), 'PHP');
+		$XMPP = new BirknerAlex\XMPPHP\XMPP($eqLogic->getConfiguration('xmpp::server'), $eqLogic->getConfiguration('xmpp::port'), explode('@', $eqLogic->getConfiguration('xmpp::fromjid'))[0], $eqLogic->getConfiguration('xmpp::password'), 'PHP', explode('@', $eqLogic->getConfiguration('xmpp::fromjid'))[1]);
 		$XMPP->connect();
 		$XMPP->processUntil('session_start', 10);
 		$XMPP->presence();
