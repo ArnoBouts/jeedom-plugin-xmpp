@@ -4,35 +4,32 @@
  */
 
 /**
- * PHPMailer SPL autoloader.
+ * XmppAutoload SPL autoloader.
  * @param string $classname The name of the class to load
  */
 
-function XmppAutoloadFromDir($dir, $classname) {
-
-    $filename = dirname(__FILE__).$dir.$classname.'.php';
-    if (is_readable($filename)) {
-        require $filename;
-        return true;
-    }
-    return false;
-}
-
 function XmppAutoload($classname)
 {
-    //Can't use __DIR__ as it's only in PHP 5.3+
-    if(XmppAutoloadFromDir(DIRECTORY_SEPARATOR, $classname)) return;
-    if(XmppAutoloadFromDir(DIRECTORY_SEPARATOR.'Connection'.DIRECTORY_SEPARATOR, $classname)) return;
-    if(XmppAutoloadFromDir(DIRECTORY_SEPARATOR.'Event'.DIRECTORY_SEPARATOR, $classname)) return;
-    if(XmppAutoloadFromDir(DIRECTORY_SEPARATOR.'EventListener'.DIRECTORY_SEPARATOR, $classname)) return;
-    if(XmppAutoloadFromDir(DIRECTORY_SEPARATOR.'EventListener'.DIRECTORY_SEPARATOR.'Stream'.DIRECTORY_SEPARATOR, $classname)) return;
-    if(XmppAutoloadFromDir(DIRECTORY_SEPARATOR.'EventListener'.DIRECTORY_SEPARATOR.'Stream'.DIRECTORY_SEPARATOR.'Authentication'.DIRECTORY_SEPARATOR, $classname)) return;
-    if(XmppAutoloadFromDir(DIRECTORY_SEPARATOR.'Exception'.DIRECTORY_SEPARATOR, $classname)) return;
-    if(XmppAutoloadFromDir(DIRECTORY_SEPARATOR.'Exception'.DIRECTORY_SEPARATOR.'Stream'.DIRECTORY_SEPARATOR, $classname)) return;
-    if(XmppAutoloadFromDir(DIRECTORY_SEPARATOR.'Protocol'.DIRECTORY_SEPARATOR, $classname)) return;
-    if(XmppAutoloadFromDir(DIRECTORY_SEPARATOR.'Protocol'.DIRECTORY_SEPARATOR.'User'.DIRECTORY_SEPARATOR, $classname)) return;
-    if(XmppAutoloadFromDir(DIRECTORY_SEPARATOR.'Stream'.DIRECTORY_SEPARATOR, $classname)) return;
-    if(XmppAutoloadFromDir(DIRECTORY_SEPARATOR.'Util'.DIRECTORY_SEPARATOR, $classname)) return;
+    $dirs = array('',
+            'Connection'.DIRECTORY_SEPARATOR,
+            'Event'.DIRECTORY_SEPARATOR,
+            'EventListener'.DIRECTORY_SEPARATOR,
+            'EventListener'.DIRECTORY_SEPARATOR.'Stream'.DIRECTORY_SEPARATOR,
+            'EventListener'.DIRECTORY_SEPARATOR.'Stream'.DIRECTORY_SEPARATOR.'Authentication'.DIRECTORY_SEPARATOR,
+            'Exception'.DIRECTORY_SEPARATOR,
+            'Exception'.DIRECTORY_SEPARATOR.'Stream'.DIRECTORY_SEPARATOR,
+            'Protocol'.DIRECTORY_SEPARATOR,
+            'Protocol'.DIRECTORY_SEPARATOR.'User'.DIRECTORY_SEPARATOR,
+            'Stream'.DIRECTORY_SEPARATOR,
+            'Util'.DIRECTORY_SEPARATOR);
+
+    foreach ($dirs as $dir) {
+        $filename = dirname(__FILE__).DIRECTORY_SEPARATOR.$dir.$classname.'.php';
+        if (is_readable($filename)) {
+            require $filename;
+            break;
+        }
+    }
 }
 
 if (version_compare(PHP_VERSION, '5.1.2', '>=')) {
