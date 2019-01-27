@@ -62,21 +62,15 @@ class xmppCmd extends cmd {
 			$_options['title'] = __('[Jeedom] - Notification', __FILE__);
 		}
 
-		$options = new Fabiang\Xmpp\Options('tcp://'.$eqLogic->getConfiguration('xmpp::server').':'.$eqLogic->getConfiguration('xmpp::port'));
-		$options
-	    ->setUsername($eqLogic->getConfiguration('xmpp::fromjid'))
-	    ->setPassword($eqLogic->getConfiguration('xmpp::password'));
-
-		$xmpp = new Fabiang\Xmpp\Client($options);
-		$xmpp->connect();
+		$XMPP = new BirknerAlex\XMPPHP\XMPP($eqLogic->getConfiguration('xmpp::server'), $eqLogic->getConfiguration('xmpp::port'), $eqLogic->getConfiguration('xmpp::fromjid'), $eqLogic->getConfiguration('xmpp::password'), 'PHP');
+		$XMPP->connect();
+		$XMPP->processUntil('session_start', 10);
+		$XMPP->presence();
 
 		foreach(explode(',', $this->getConfiguration('recipient')) AS $sJid){
-			$message = new Fabiang\Xmpp\Protocol\Message();
-			$message->setMessage($_options['message'])
-			    ->setTo($sJid)
-			$xmpp->send($message);
+			$XMPP->message($sJid, $_options['message'], 'chat');
 		}
-		return $xmpp->disconnect();
+		return $XMPP->disconnect(); 
 	}
 
 	/*     * **********************Getteur Setteur*************************** */
