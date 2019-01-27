@@ -19,7 +19,7 @@
 /* * ***************************Includes********************************* */
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 
-include_file('3rdparty', 'Xmpp/XmppAutoload', 'php','xmpp');
+include_file('3rdparty', 'XmppAutoload', 'php','xmpp');
 
 class xmpp extends eqLogic {
 
