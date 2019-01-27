@@ -94,7 +94,6 @@ foreach ($eqLogics as $eqLogic) {
 <div class="col-sm-6">
     <form class="form-horizontal">
         <fieldset>
-            <div class='sendMode smtp' style="display: none;">
                 <div class="form-group">
                     <label class="col-sm-4 control-label">{{Serveur XMPP}}</label>
                     <div class="col-sm-6">
@@ -119,7 +118,6 @@ foreach ($eqLogics as $eqLogic) {
                         <input type="password" class="eqLogicAttr form-control" data-l1key='configuration' data-l2key='xmpp::password' />
                     </div>
                 </div>
-            </div>
         </fieldset>
     </form>
 </div>

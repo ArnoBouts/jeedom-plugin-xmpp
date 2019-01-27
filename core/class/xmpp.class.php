@@ -18,17 +18,8 @@
 
 /* * ***************************Includes********************************* */
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
-include_file('3rdparty', 'XmppPHP/Authentication/AuthTypes/AuthTypeInterface', 'php','xmpp');
-include_file('3rdparty', 'XmppPHP/Authentication/AuthTypes/Plain', 'php','xmpp');
-include_file('3rdparty', 'XmppPHP/Authentication/Auth', 'php','xmpp');
-include_file('3rdparty', 'XmppPHP/Xml/Stanzas/Iq', 'php','xmpp');
-include_file('3rdparty', 'XmppPHP/Xml/Stanzas/Message', 'php','xmpp');
-include_file('3rdparty', 'XmppPHP/Xml/Stanzas/Presence', 'php','xmpp');
-include_file('3rdparty', 'XmppPHP/Xml/AbstractXml', 'php','xmpp');
-include_file('3rdparty', 'XmppPHP/Xml/Auth', 'php','xmpp');
-include_file('3rdparty', 'XmppPHP/Xml/Xml', 'php','xmpp');
-include_file('3rdparty', 'XmppPHP/Options', 'php','xmpp');
-include_file('3rdparty', 'XmppPHP/XmppClient', 'php','xmpp');
+
+include_file('3rdparty', 'Xmpp/XmppAutoload', 'php','xmpp');
 
 class xmpp extends eqLogic {
 
@@ -71,18 +62,19 @@ class xmppCmd extends cmd {
 			$_options['title'] = __('[Jeedom] - Notification', __FILE__);
 		}
 
-		$options = new Options();
+		$options = new Fabiang\Xmpp\Options('tcp://'.$eqLogic->getConfiguration('xmpp::server').':'.$eqLogic->getConfiguration('xmpp::port'));
 		$options
-	    ->setHost($eqLogic->getConfiguration('xmpp::server'))
-	    ->setPort($eqLogic->getConfiguration('xmpp::port'))
 	    ->setUsername($eqLogic->getConfiguration('xmpp::fromjid'))
 	    ->setPassword($eqLogic->getConfiguration('xmpp::password'));
-			
-		$xmpp = new XmppClient();
-		$xmpp->connect($options);
-		
+
+		$xmpp = new Fabiang\Xmpp\Client($options);
+		$xmpp->connect();
+
 		foreach(explode(',', $this->getConfiguration('recipient')) AS $sJid){
-			$xmpp->sendMessage($_options['message'], $sJid)
+			$message = new Fabiang\Xmpp\Protocol\Message();
+			$message->setMessage($_options['message'])
+			    ->setTo($sJid)
+			$xmpp->send($message);
 		}
 		return $xmpp->disconnect();
 	}

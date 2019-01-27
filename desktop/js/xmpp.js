@@ -15,11 +15,6 @@
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
 
-$('.eqLogicAttr[data-l1key=configuration][data-l2key=sendMode]').on('change', function () {
-    $('.sendMode').hide();
-    $('.sendMode.' + $(this).value()).show();
-});
-
 function addCmdToTable(_cmd) {
     if (!isset(_cmd)) {
         var _cmd = {configuration: {}};
